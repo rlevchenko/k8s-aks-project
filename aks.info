@@ -1,3 +1,6 @@
+#Get aks versions
+az aks get-versions -l westeurope -o table
+
 #Create K8S cluster
 az aks create `
     --resource-group AKS `
@@ -5,7 +8,7 @@ az aks create `
     --node-count 1 `
     --node-vm-size Standard_D1_v2 `
     --enable-addons monitoring `
-    --kubernetes-version 1.9.10 `
+    --kubernetes-version 1.12.6 `
     --generate-ssh-keys
 
 #Connect to the cluster
