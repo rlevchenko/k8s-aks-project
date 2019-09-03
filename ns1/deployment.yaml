@@ -1,0 +1,42 @@
+#Task 1 - Deployment + Task 9
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asp-deployment1
+  namespace: demo1
+  labels:
+    app: web
+    release: stable
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aspcore
+  template:
+    metadata:
+      labels:
+        app: aspcore
+    spec:
+      containers:
+        - name: web-aspcore
+          image: crj4r5.azurecr.io/webapp:41
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "400m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - aspcore
+              topologyKey: "kubernetes.io/hostname"
+

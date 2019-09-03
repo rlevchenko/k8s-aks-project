@@ -1,0 +1,37 @@
+# Task 3 - Deny traffic between ns
+
+#NS 2
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-from-other-namespaces
+  namespace: demo2
+spec:
+  podSelector:
+    matchLabels: {}
+  ingress:
+    - from:
+        - podSelector: {}
+
+---
+# Task 4 - Deny all traffic (except DNS) from PODs
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-external-egress
+  namespace: demo2
+spec:
+  podSelector:
+    matchLabels:
+      app: aspcore
+  policyTypes:
+    - Egress
+  egress:
+    # allow DNS TCP/UDP 53 ports
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    - to:
+        - namespaceSelector: {}

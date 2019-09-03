@@ -1,0 +1,83 @@
+# Task 3 - Namespace 2
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo2
+  labels:
+    task: march
+---
+#Defining limits - task 9
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-cpu-limit-range
+  namespace: demo2
+spec:
+  limits:
+  - default:
+      memory: 256Mi
+      cpu: "400M"
+    defaultRequest:
+      memory: 128Mi
+      cpu: "200M"
+    type: Container
+---    
+# Task 2 - Setting the Policy
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: nonroot
+  namespace: demo2
+spec:
+  #Disable access to all devices on the host/privileged mode
+  privileged: false
+  #Enforce MustRunAsNonRoot
+  allowPrivilegeEscalation: false
+  runAsUser:
+    rule: MustRunAsNonRoot
+  seLinux:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+    - "*"
+---
+#Task 9 - Scalability
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aspcore-load
+  namespace: demo2
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: asp-deployment2
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
+---
+#Task 9 - Scalability - Memory
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aspcore-load-mem
+  namespace: demo2
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: asp-deployment2
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 70

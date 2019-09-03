@@ -1,0 +1,65 @@
+#Task 7  + 7.1 Service Account
+
+#New SA - cluster level
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: read-sa
+---
+#New SA - ns level
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: read-sa-ns
+---
+#New Role - cluster level
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: read-only-clu
+rules:
+  - apiGroups: ["", "extensions", "apps"]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+#New Role - ns level
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: read-only-ns
+  namespace: demo1
+rules:
+  - apiGroups: ["", "extensions", "apps"]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+#Binding the role to the sa - cluster
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-cluster-pods
+subjects:
+  - kind: ServiceAccount
+    name: read-sa
+    apiGroup: ""
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: read-only-clu
+  apiGroup: rbac.authorization.k8s.io
+---
+#Binding the role to the sa -NS1
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-demo1-pods
+  namespace: demo1
+subjects:
+  - kind: ServiceAccount
+    name: read-sa-ns
+    apiGroup: ""
+    namespace: default
+roleRef:
+  kind: Role
+  name: read-only-ns
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,14 @@
+#Task 5 - Publishing the deployment through the Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service1
+  namespace: demo1
+spec:
+  selector:
+    app: aspcore
+  type: LoadBalancer
+  ports:
+    - name: name-of-the-port
+      port: 80
+      targetPort: 80

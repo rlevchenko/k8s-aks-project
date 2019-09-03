@@ -1,1 +1,1 @@
-# k8s
+Sample NET Core Application (March task)
