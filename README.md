@@ -23,4 +23,5 @@
 - Adds service accounts on Namespace and Cluster levels 
 - Creates a service and publishes it
 
+## Azure DevOps Pipeline
 ![image](https://rlevchenko.files.wordpress.com/2019/09/azure-devops-aks-pipeline.jpg)
