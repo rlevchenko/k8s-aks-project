@@ -1,4 +1,4 @@
-#Task 1 - Deployment + Task 9
+#Deploy the app and set anti-affinity
 apiVersion: apps/v1
 kind: Deployment
 metadata:

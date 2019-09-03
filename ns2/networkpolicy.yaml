@@ -1,4 +1,4 @@
-# Task 3 - Deny traffic between ns
+#Deny traffic between namespaces
 
 #NS 2
 kind: NetworkPolicy
@@ -14,7 +14,7 @@ spec:
         - podSelector: {}
 
 ---
-# Task 4 - Deny all traffic (except DNS) from PODs
+#Deny all traffic (except DNS) from PODs
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:

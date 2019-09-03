@@ -1,4 +1,4 @@
-# Task 3 - Namespace 2
+# #Create a namespace 2
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -6,7 +6,7 @@ metadata:
   labels:
     task: march
 ---
-#Defining limits - task 9
+#Define mem-cpu limits
 apiVersion: v1
 kind: LimitRange
 metadata:
@@ -22,7 +22,7 @@ spec:
       cpu: "200M"
     type: Container
 ---    
-# Task 2 - Setting the Policy
+# Set POD policy (must run as non root)
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -44,7 +44,7 @@ spec:
   volumes:
     - "*"
 ---
-#Task 9 - Scalability
+#Scale pods automatically (cpu metric)
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -63,7 +63,7 @@ spec:
       name: cpu
       targetAverageUtilization: 70
 ---
-#Task 9 - Scalability - Memory
+#Scale pods automatically (mem metric)
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
