@@ -1,4 +1,4 @@
-#Get credentials
+#Get Azure AKS Credentials
 az aks get-credentials --resource-group kubRg --name rlk8sclu-j4r5
 
 #Open K8S dashboard
@@ -18,5 +18,5 @@ kubectl config set-context readsa --user=read-sa --cluster=rlk8sclu-j4r5
 kubectl config set-credentials ns-read-sa --token=$(kubectl get secret read-sa-ns-token-zqgm6 --namespace=default --output jsonpath='{.data.token}' | base64 -d)
 kubectl config set-context nsreadsa --user=ns-read-sa --cluster=rlk8sclu-j4r5
 
-$Get Service's Public IP
-kubectl get service -n demo1 -o jsonpath='{.items[].status.loadBalancer.ingress[0].ip}'
+#Get Service's Public IP
+kubectl get service -n ns1 -o jsonpath='{.items[].status.loadBalancer.ingress[0].ip}'

@@ -27,7 +27,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: read-only-ns
-  namespace: demo1
+  namespace: ns1
 rules:
   - apiGroups: ["", "extensions", "apps"]
     resources: ["pods"]
@@ -52,8 +52,8 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: read-demo1-pods
-  namespace: demo1
+  name: read-ns1-pods
+  namespace: ns1
 subjects:
   - kind: ServiceAccount
     name: read-sa-ns

@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: asp-deployment2
-  namespace: demo2
+  namespace: ns2
   labels:
     app: web
     release: stable
