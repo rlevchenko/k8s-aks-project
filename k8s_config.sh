@@ -9,10 +9,10 @@ az aks browse --resource-group kubRg --name rlk8sclu-l3y5
 #Get the node resource group
 az aks show --resource-group kubRg --name rlk8sclu-l3y5 --query nodeResourceGroup -o tsv
 
-#Create the disk
+#Create the disk (static volume task)
 az disk create --resource-group MC_kubRg_rlk8sclu-l3y5_westeurope --name rkStaticDisk --size-gb 5 --sku Standard_LRS --query id --output tsv
 
-#Set contexts
+#Set contexts (test service accounts)
 kubectl config set-credentials read-sa --token=$(kubectl get secret read-sa-token-9kvrt --namespace=default --output jsonpath='{.data.token}' | base64 -d)
 kubectl config set-context readsa --user=read-sa --cluster=rlk8sclu-l3y5
 
