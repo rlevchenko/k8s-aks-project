@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: web-aspcore
-          image: crj4r5.azurecr.io/webapp:41
+          image: crl3y5.azurecr.io/aspnetapp:latest
           ports:
             - containerPort: 80
           resources:
@@ -39,4 +39,3 @@ spec:
                     values:
                       - aspcore
               topologyKey: "kubernetes.io/hostname"
-
