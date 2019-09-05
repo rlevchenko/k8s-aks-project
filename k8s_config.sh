@@ -6,6 +6,9 @@ az aks get-credentials --resource-group kubRg --name rlk8sclu-l3y5
 kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 az aks browse --resource-group kubRg --name rlk8sclu-l3y5
 
+#View K8S config (.kube/config)
+kubectl config view
+
 #Get the node resource group
 az aks show --resource-group kubRg --name rlk8sclu-l3y5 --query nodeResourceGroup -o tsv
 
