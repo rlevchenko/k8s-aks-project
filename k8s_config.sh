@@ -1,3 +1,15 @@
+#Get AKS versions
+az aks get-versions -l WestEurope --query 'orchestrators[].orchestratorVersion' -o tsv
+
+#Get the latest AKS version
+version=$(az aks get-versions -l WestEurope --query 'orchestrators[-1].orchestratorVersion' -o tsv)
+
+#Create AKS
+az aks create --resource-group mvphero --name rlaks01 --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location WestEurope
+
+#Create ACR
+az acr create --resource-group mvphero --name rlacr01 --sku Basic --location WestEurope
+
 #Get Azure AKS Credentials
 az login
 az aks get-credentials --resource-group kubRg --name rlk8sclu-l3y5
