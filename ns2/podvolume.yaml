@@ -23,4 +23,4 @@ spec:
       azureDisk:
         kind: Managed
         diskName: rkStaticDisk
-        diskURI: /subscriptions/fedf4c96-f367-4754-9324-961fc2ef4113/resourceGroups/MC_kubRg_rlk8sclu-j4r5_westeurope/providers/Microsoft.Compute/disks/rkStaticDisk
+        diskURI: /subscriptions/xxxxxxxxxxxxxxxx/resourceGroups/MC_kubRg_rlk8sclu-j4r5_westeurope/providers/Microsoft.Compute/disks/rkStaticDisk
